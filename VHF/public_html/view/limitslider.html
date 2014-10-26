@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jQuery LimitSlider</title>
+		<!-- jQuery/jQueryUI (hosted) -->
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="../css/style.css">
+		<!--<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/themes/sunny/jquery-ui.css" rel="stylesheet" type="text/css"/>-->
+        <script src="../js/jq-limitslider.js"></script>
+        <style type="text/css">
+	
+		.tooltip{
+   			display: inline;
+    		position: relative;
+		}
+		
+		.tooltip:hover:after{
+    		background: #333;
+    		background: rgba(0,0,0,.8);
+    		border-radius: 5px;
+    		bottom: 26px;
+    		color: #fff;
+    		content: 'Versleep de bolletjes';
+    		left: 20%;
+    		padding: 5px 15px;
+    		position: absolute;
+    		z-index: 98;
+    		width: 220px;
+		}
+		
+		.tooltip:hover:before{
+    		border: solid;
+    		border-color: #333 transparent;
+    		border-width: 6px 6px 0 6px;
+    		bottom: 20px;
+    		content: "";
+    		left: 50%;
+    		position: absolute;
+    		z-index: 99;
+		}
+	
+	</style>
+    </head>
+    <body>
+        
+
+		<h1>jQuery LimitSlider</h1>
+
+		<h2>Basic limit</h2>
+        <p>
+  <label for="amount">Price range:</label>
+  <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+</p>
+		<div id="basic"></div>
+		<script>
+           	$(function() {
+				$('#basic').limitslider({
+      range: true,
+      orientation: "horizontal",
+					values:		[0, 1500],
+					min:		0,
+					max:		1500,
+					step:		50,
+					showRanges: true,
+					left:		7,
+					ranges:		[true, false, true, false],                    
+					label:	    true,
+                    slide: function( event, ui ) {
+                        $( "#amount" ).val(ui.values[ 0 ] + "-" + ui.values[ 1 ] );
+                    }
+			   });
+               $( "#amount" ).val($('#basic').limitslider( "values", 0 ) + "-" + $('#basic').limitslider( "values", 1 ) );
+			});
+            
+            $(document).ready(function() { 
+                $('.ui-slider a').addClass('tooltip');
+            });
+		</script>
+    </body>
+</html>
